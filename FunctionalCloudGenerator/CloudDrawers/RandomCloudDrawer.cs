@@ -10,8 +10,9 @@ namespace FunctionalCloudGenerator.CloudDrawers
         private const int MaxTriesAmount = 100;
         private static readonly Random Random = new Random();
 
-        public static Bitmap FormCloud(Bitmap bitmap, Configuration config, List<string> words)
+        public static Bitmap FormCloud(Configuration config, List<string> words)
         {
+            var bitmap = new Bitmap(config.Width, config.Height);
             using (var graphics = Graphics.FromImage(bitmap))
             {
                 var fontSizeDecrease = 0;

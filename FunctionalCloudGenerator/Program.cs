@@ -31,8 +31,8 @@ namespace FunctionalCloudGenerator
             {"bmp", ImageFormat.Bmp}
         };
 
-        public static Dictionary<string, Func<Bitmap, Configuration, List<string>, Bitmap>> Algorithms = 
-            new Dictionary<string, Func<Bitmap, Configuration, List<string>, Bitmap>>
+        public static Dictionary<string, Func<Configuration, List<string>, Bitmap>> Algorithms = 
+            new Dictionary<string, Func<Configuration, List<string>, Bitmap>>
         {
             {"simple", SimpleCloudDrawer.FormCloud},
             {"random", RandomCloudDrawer.FormCloud}
@@ -47,8 +47,7 @@ namespace FunctionalCloudGenerator
             var bannedWordsDictionary = TextTypes[config.TextType](arguments.BannedWordsFile);
             var topWords = GetTopWords(wordsDictionary, bannedWordsDictionary, config.WordsAmount);
 
-            var bitmap = new Bitmap(config.Width, config.Height);
-            bitmap = Algorithms[config.Algorithm](bitmap, config, topWords);
+            var bitmap = Algorithms[config.Algorithm](config, topWords);
 
             var resultPath = arguments.ResultFile + "." + config.ImageFormat;
             ApplicationTypes[config.ApplicationType](bitmap, resultPath, Formats[config.ImageFormat]);
